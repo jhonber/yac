@@ -2,8 +2,22 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const mongoose = require('mongoose')
+const env = process.env.NODE_ENV || 'development'
+const config = require('./config/db-' + env)
 
 const app = express()
+
+const connection = mongoose.connection
+connection.once('open', () => {
+  console.log('Successfully connected to DB!')
+})
+
+connection.on('err', console.error.bind(console, 'DB connection error!'))
+mongoose.connect(config.db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 app.use(logger('dev'))
 app.use(express.json())
