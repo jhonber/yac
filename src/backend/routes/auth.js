@@ -3,14 +3,20 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const jwt = require('jwt-simple')
 
-const genHash = (password) => {
+const genSalt = () => {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
       if (err) reject(err)
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) reject(err)
-        resolve(hash)
-      })
+      resolve(salt)
+    })
+  })
+}
+
+const genHash = (salt, password) => {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      if (err) reject(err)
+      resolve(hash)
     })
   })
 }
@@ -64,7 +70,10 @@ module.exports = (app, User, config, mountPoint) => {
         msg: 'Passwords do not match!'
       })
     } else {
-      genHash(data.password)
+      genSalt()
+        .then((salt) => {
+          return genHash(salt, data.password)
+        })
         .then((hash) => {
           const { password2, ...userData } = data
           userData.password = hash
