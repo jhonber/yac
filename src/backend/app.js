@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const env = process.env.NODE_ENV || 'development'
 const config = require('./config/db-' + env)
 const User = require('./models/User')
+const Message = require('./models/Message')
 
 const app = express()
 
@@ -27,5 +28,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 require('./routes/auth')(app, User, config, '/api')
+require('./routes/message')(app, Message, config, '/api/message')
 
+require('./config/passport-strategies')(User, config)
 module.exports = app
