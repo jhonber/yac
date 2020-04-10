@@ -5,6 +5,7 @@ const logger = require('morgan')
 const mongoose = require('mongoose')
 const env = process.env.NODE_ENV || 'development'
 const config = require('./config/db-' + env)
+const User = require('./models/User')
 
 const app = express()
 
@@ -25,6 +26,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-require('./routes/auth')(app, '/auth')
+require('./routes/auth')(app, User, config, '/auth')
 
 module.exports = app
