@@ -21,14 +21,16 @@ mongoose.connect(config.db, {
   useUnifiedTopology: true
 })
 
+mongoose.set('useCreateIndex', true)
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+require('./config/passport-strategies')(User, config)
 require('./routes/auth')(app, User, config, '/api')
 require('./routes/message')(app, Message, config, '/api/message')
 
-require('./config/passport-strategies')(User, config)
 module.exports = app
