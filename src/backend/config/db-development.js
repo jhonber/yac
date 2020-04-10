@@ -3,7 +3,9 @@ const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_URL = process.env.DB_URL
 const DB_PORT = process.env.DB_PORT
+const SECRET = process.env.SECRET
 
 module.exports = {
-  db: `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_URL}:${DB_PORT}/${DB_NAME}`
+  db: `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_URL}:${DB_PORT}/${DB_NAME}`,
+  passportSecret: SECRET
 }
