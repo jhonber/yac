@@ -26,6 +26,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-require('./routes/auth')(app, User, config, '/auth')
+require('./routes/auth')(app, User, config, '/api')
 
 module.exports = app

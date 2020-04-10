@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const jwt = require('jwt-simple')
 
 const genHash = (password) => {
   return new Promise((resolve, reject) => {
@@ -16,11 +17,42 @@ const genHash = (password) => {
 
 module.exports = (app, User, config, mountPoint) => {
   router.post('/login', (req, res, next) => {
-    res.send('/auth')
+    const data = req.body
+
+    User.findOne({ email: data.email })
+      .then((user) => {
+        console.log({ user })
+        console.log(user.password)
+        return bcrypt.compare(data.password, user.password)
+      })
+      .then((result) => {
+        console.log({ result })
+        if (result) {
+          const email = { email: data.email }
+          const token = jwt.encode(email, config.passportSecret)
+          return res.json({
+            ok: true,
+            token: token
+          })
+        } else {
+          return res.json({
+            ok: false,
+            msg: 'Bad credential!'
+          })
+        }
+      })
+      .catch((err) => {
+        console.log('Error: ', err)
+        res.json({
+          ok: false,
+          msg: err.message
+        })
+      })
   })
 
   router.post('/signup', (req, res, next) => {
     const data = req.body
+
     if (!data.username || !data.password || !data.email) {
       res.json({
         ok: false,
