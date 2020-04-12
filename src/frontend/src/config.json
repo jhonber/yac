@@ -1,0 +1,8 @@
+{
+  "development": {
+    "urlBase": "http://localhost:3000/",
+    "signup": "api/signup",
+    "login": "api/login"
+  },
+  "env": "development"
+}
