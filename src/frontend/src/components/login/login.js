@@ -1,5 +1,10 @@
 import React,
 { useState } from 'react'
+
+import {
+  useHistory
+} from 'react-router-dom'
+
 import {
   Input,
   Button,
@@ -12,12 +17,13 @@ import {
   Col
 } from 'reactstrap'
 
-import { postSecure } from '../apiUtils/apiUtils'
+import { post } from '../apiUtils/apiUtils'
 import config from '../../config.json'
 const env = config.env
 const CONFIG = config[env]
 
 const Signup = () => {
+  const history = useHistory()
   const [email, setEmail] = useState('jhon2@gmail.com')
   const [password, setPassword] = useState('1234')
 
@@ -38,13 +44,13 @@ const Signup = () => {
     }
     console.log({ data })
 
-    postSecure(url, data)
+    post(url, data)
       .then(res => {
         console.log({ res })
         if (res) {
           if (res.ok) {
-            // TODO:
-            // - redirect to home
+            window.localStorage.token = res.token
+            history.push('/')
           } else {
             window.alert(res.msg)
           }
