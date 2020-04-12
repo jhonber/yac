@@ -77,21 +77,45 @@ const Signup = () => {
             <Form>
               <FormGroup>
                 <Label>Username</Label>
-                <Input type='text' name='username' value={username} onChange={handleUsername} />
+                <Input
+                  type='text'
+                  name='username'
+                  value={username}
+                  onChange={handleUsername}
+                />
               </FormGroup>
               <FormGroup>
                 <Label>Email</Label>
-                <Input type='text' name='email' value={email} onChange={handleEmail} />
+                <Input
+                  type='text'
+                  name='email'
+                  value={email}
+                  onChange={handleEmail}
+                />
               </FormGroup>
               <FormGroup>
                 <Label>Password</Label>
-                <Input type='password' name='password' value={password} onChange={handlePassword} />
+                <Input
+                  type='password'
+                  name='password'
+                  value={password}
+                  onChange={handlePassword}
+                />
               </FormGroup>
               <FormGroup>
                 <Label>Confirmation</Label>
-                <Input type='password' name='password2' value={password2} onChange={handlePassword2} />
+                <Input
+                  type='password'
+                  name='password2'
+                  value={password2}
+                  onChange={handlePassword2}
+                />
               </FormGroup>
-              <Button onClick={handleSubmit}>Sign up</Button>
+              <Button
+                onClick={handleSubmit}
+              >
+                Sign up
+              </Button>
             </Form>
           </Jumbotron>
         </Col>
