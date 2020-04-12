@@ -7,12 +7,16 @@ import {
 
 import Signup from './components/signup/signup'
 import Login from './components/login/login'
+import Room from './components/room/room'
 
 function App () {
   return (
     <Router>
       <Switch>
-        <Route exact path='/login'>
+        <Route exact path='/'>
+          <Room />
+        </Route>
+        <Route path='/login'>
           <Login />
         </Route>
         <Route path='/signup'>

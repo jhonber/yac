@@ -1,0 +1,18 @@
+.room {
+  width: 60%;
+  margin-top: 5px;
+}
+
+.room-content {
+  overflow-y: scroll;
+}
+
+.main {
+  border-style: inset;
+  border-color: #e7e7fd;
+  border-bottom-style: hidden;
+}
+
+.input-text {
+  padding: 0
+}
