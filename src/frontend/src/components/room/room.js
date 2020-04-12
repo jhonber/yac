@@ -15,6 +15,7 @@ import {
 
 import './room.css'
 
+import Header from '../header/header'
 import Message from '../message/message'
 import ShowUsers from '../showUsers/showUsers'
 import TextInput from '../textInput/textInput'
@@ -64,25 +65,28 @@ const Room = () => {
   }
 
   return (
-    <Container className='themed-container room' fluid='sm'>
-      <Row className='main'>
-        <Col className='room-content'>
-          {renderContent()}
-        </Col>
-        <Col sm='2'>
-          <ShowUsers
-            data={dummy}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col className='input-text'>
-          <TextInput
-            placeholder='Say hello!'
-          />
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Header />
+      <Container className='themed-container room' fluid='sm'>
+        <Row className='main'>
+          <Col className='room-content'>
+            {renderContent()}
+          </Col>
+          <Col sm='2'>
+            <ShowUsers
+              data={dummy}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className='input-text'>
+            <TextInput
+              placeholder='Say hello!'
+            />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 
