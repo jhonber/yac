@@ -3,7 +3,6 @@ const initial = {
 }
 
 export default (state = initial, action) => {
-  console.log('XXXX: ', action)
   switch (action.type) {
     case 'LOGIN_USER':
       return {
