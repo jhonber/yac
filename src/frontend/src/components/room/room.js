@@ -1,6 +1,11 @@
 import React, {
-  useState
+  useState,
+  useEffect
 } from 'react'
+
+import {
+  useHistory
+} from 'react-router-dom'
 
 import {
   Container,
@@ -38,11 +43,17 @@ const Room = () => {
     }
   ]
 
+  const  history = useHistory()
   const [content, setContent] = useState(dummy)
+
+  useEffect(() => {
+    if (!window.localStorage.token) {
+      history.push('/login')
+    }
+  })
 
   const renderContent = () => {
     return content.map((msg, ind) => {
-      console.log({ msg })
       return (
         <Message
           key={msg.date + ind}
