@@ -30,6 +30,7 @@ const Room = (props) => {
   const history = useHistory()
   const [initialized, setInitialized] = useState(false)
   const [content, setContent] = useState([])
+  const [connectedUsers, setConnectedUser] = useState(0)
 
   const connectToRoom = () => {
     const token = window.localStorage.token
@@ -37,17 +38,27 @@ const Room = (props) => {
     const socket = io.connect(url)
 
     socket.on('connect', () => {
-      console.log('CONNECTED!!')
       socket.emit('newUser', {
-        username: props.currentUser.username
+        username: props.currentUser.username || window.localStorage.username
       })
       setInitialized(true)
     })
 
-    socket.on('newMessage', (msg) => {
+    socket.on('newMessage', msg => {
       console.log('New message: ', msg)
       setContent(content => [...content, msg])
       scrollDown()
+    })
+
+    socket.on('newUser', data => {
+      // show status about new connected user
+      console.log('new user:', data)
+      setConnectedUser(connectedUsers => data.allUsers)
+    })
+
+    socket.on('leftUser', data => {
+      console.log('user left: ', data)
+      setConnectedUser(connectedUsers => data.allUsers)
     })
   }
 
@@ -55,7 +66,6 @@ const Room = (props) => {
     const url = `${props.config.urlBase}${props.config.message}`
     getSecure(url)
       .then(res => {
-        console.log({ res })
         res.data.reverse()
         setContent(content => res.data)
         scrollDown()
@@ -66,7 +76,6 @@ const Room = (props) => {
     const url = `${props.config.urlBase}${props.config.validateUser}`
     getSecure(url)
       .then(res => {
-        console.log('res: ', res)
         if (res.ok) {
           props.currectUser(res.user)
         }
@@ -112,7 +121,7 @@ const Room = (props) => {
         </Col>
         <Col sm='2'>
           <ShowUsers
-            data={[]}
+            data={connectedUsers}
           />
         </Col>
       </Row>
