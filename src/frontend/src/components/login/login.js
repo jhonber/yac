@@ -19,9 +19,6 @@ import {
 
 import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
-import config from '../../config.json'
-const env = config.env
-const CONFIG = config[env]
 
 const Login = (props) => {
   const history = useHistory()
@@ -37,7 +34,7 @@ const Login = (props) => {
   }
 
   const handleSubmit = () => {
-    const url = `${CONFIG.urlBase}${CONFIG.login}`
+    const url = `${props.config.urlBase}${props.config.login}`
     console.log({ url })
     const data = {
       email: email,

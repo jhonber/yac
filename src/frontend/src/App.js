@@ -5,22 +5,33 @@ import {
   Route
 } from 'react-router-dom'
 
+import config from './config.json'
+
 import Signup from './components/signup/signup'
 import Login from './components/login/login'
 import Room from './components/room/room'
+
+const env = config.env
+const CONFIG = config[env]
 
 function App () {
   return (
     <Router>
       <Switch>
         <Route exact path='/'>
-          <Room />
+          <Room
+            config={CONFIG}
+          />
         </Route>
         <Route path='/login'>
-          <Login />
+          <Login
+            config={CONFIG}
+          />
         </Route>
         <Route path='/signup'>
-          <Signup />
+          <Signup
+            config={CONFIG}
+          />
         </Route>
       </Switch>
     </Router>

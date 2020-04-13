@@ -14,11 +14,8 @@ import {
 
 import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
-import config from '../../config.json'
-const env = config.env
-const CONFIG = config[env]
 
-const Signup = () => {
+const Signup = (props) => {
   const [username, setUsername] = useState('jhon')
   const [email, setEmail] = useState('jhon@gmail.com')
   const [password, setPassword] = useState('1234')
@@ -41,7 +38,7 @@ const Signup = () => {
   }
 
   const handleSubmit = () => {
-    const url = `${CONFIG.urlBase}${CONFIG.signup}`
+    const url = `${props.config.urlBase}${props.config.signup}`
     console.log({ url })
     const data = {
       username: username,
