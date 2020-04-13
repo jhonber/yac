@@ -51,7 +51,6 @@ module.exports = (app, io, Message, User, config, mountPoint) => {
       const newMessage = new Message(data)
       newMessage.save()
         .then((message) => {
-          console.log({ message })
           io.emit('newMessage', {
             username: req.user.username,
             content: message.content,
