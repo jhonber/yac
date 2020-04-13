@@ -48,6 +48,7 @@ const Login = (props) => {
         if (res) {
           if (res.ok) {
             window.localStorage.token = res.token
+            window.localStorage.username = res.user.username
             props.currectUser(res.user)
             history.push('/')
           } else {
