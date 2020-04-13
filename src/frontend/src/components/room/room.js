@@ -7,6 +7,8 @@ import {
   useHistory
 } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
 import {
   Container,
   Row,
@@ -20,7 +22,7 @@ import Message from '../message/message'
 import ShowUsers from '../showUsers/showUsers'
 import TextInput from '../textInput/textInput'
 
-const Room = () => {
+const Room = (props) => {
   const dummy = [
     {
       username: 'jhon',
@@ -65,29 +67,34 @@ const Room = () => {
   }
 
   return (
-    <div>
+    <Container className='themed-container room' fluid='sm'>
       <Header />
-      <Container className='themed-container room' fluid='sm'>
-        <Row className='main'>
-          <Col className='room-content'>
-            {renderContent()}
-          </Col>
-          <Col sm='2'>
-            <ShowUsers
-              data={dummy}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className='input-text'>
-            <TextInput
-              placeholder='Say hello!'
-            />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+      <Row className='main'>
+        <Col className='room-content'>
+          {renderContent()}
+        </Col>
+        <Col sm='2'>
+          <ShowUsers
+            data={dummy}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col className='input-text'>
+          <TextInput
+            placeholder='Say hello!'
+            {...props}
+          />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
-export default Room
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps, null)(Room)
