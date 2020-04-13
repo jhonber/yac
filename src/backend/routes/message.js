@@ -2,25 +2,40 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 
-module.exports = (app, io, Message, config, mountPoint) => {
+module.exports = (app, io, Message, User, config, mountPoint) => {
   router.get('/',
     [passport.authenticate('jwt', { session: false })],
     (req, res, next) => {
+      const process = (messages) => {
+        return messages.map(msg => {
+          return User.findOne({ _id: msg.userId })
+            .then(user => {
+              const data = {
+                username: user.username,
+                content: msg.content,
+                date: msg.createdAt
+              }
+              return Promise.resolve(data)
+            })
+        })
+      }
+
       Message.find({})
         .sort({ createdAt: -1 })
-        .limit(2)
-        .exec((err, messages) => {
-          if (err) {
-            res.json({
-              ok: false,
-              msg: err.message
-            })
-          } else {
-            res.json({
-              ok: true,
-              data: messages
-            })
-          }
+        .limit(10)
+        .exec()
+        .then(messages => Promise.all(process(messages)))
+        .then(data => {
+          res.json({
+            ok: false,
+            data: data
+          })
+        })
+        .catch(err => {
+          res.json({
+            ok: false,
+            data: err.message
+          })
         })
     })
 
