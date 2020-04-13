@@ -1,9 +1,9 @@
-import React,
-{ useState } from 'react'
-
-import {
-  useHistory
-} from 'react-router-dom'
+import React, {
+  useState
+} from 'react'
+import { useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { currectUser } from '../redux/actions/users'
 
 import {
   Input,
@@ -22,7 +22,7 @@ import config from '../../config.json'
 const env = config.env
 const CONFIG = config[env]
 
-const Signup = () => {
+const Login = (props) => {
   const history = useHistory()
   const [email, setEmail] = useState('jhon2@gmail.com')
   const [password, setPassword] = useState('1234')
@@ -50,6 +50,7 @@ const Signup = () => {
         if (res) {
           if (res.ok) {
             window.localStorage.token = res.token
+            props.currectUser(res.user)
             history.push('/')
           } else {
             window.alert(res.msg)
@@ -99,4 +100,8 @@ const Signup = () => {
   )
 }
 
-export default Signup
+const mapDispatchToProps = (dispatch) => ({
+  currectUser: (user) => dispatch(currectUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(Login)
