@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const jwt = require('jwt-simple')
+const passport = require('passport')
 
 const genSalt = () => {
   return new Promise((resolve, reject) => {
@@ -24,11 +25,15 @@ const genHash = (salt, password) => {
 module.exports = (app, User, config, mountPoint) => {
   router.post('/login', (req, res, next) => {
     const data = req.body
+    let userData
 
     User.findOne({ email: data.email })
       .then((user) => {
         console.log({ user })
-        console.log(user.password)
+        userData = {
+          username: user.username,
+          email: user.email
+        }
         return bcrypt.compare(data.password, user.password)
       })
       .then((result) => {
@@ -38,7 +43,8 @@ module.exports = (app, User, config, mountPoint) => {
           const token = jwt.encode(email, config.passportSecret)
           return res.json({
             ok: true,
-            token: token
+            token: token,
+            user: userData
           })
         } else {
           return res.json({
@@ -58,6 +64,7 @@ module.exports = (app, User, config, mountPoint) => {
 
   router.post('/signup', (req, res, next) => {
     const data = req.body
+    console.log({ data })
 
     if (!data.username || !data.password || !data.email) {
       res.json({
@@ -92,11 +99,23 @@ module.exports = (app, User, config, mountPoint) => {
           console.log('Error: ', err)
           res.json({
             ok: false,
-            msg: err
+            msg: err.message
           })
         })
     }
   })
+
+  router.get('/validate',
+    [passport.authenticate('jwt', { session: false })],
+    (req, res, next) => {
+      res.json({
+        ok: true,
+        user: {
+          username: req.user.username,
+          email: req.user.email
+        }
+      })
+    })
 
   app.use(mountPoint, router)
 }
