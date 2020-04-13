@@ -34,6 +34,9 @@ app.use(cors())
 
 require('./config/passport-strategies')(User, config)
 require('./routes/auth')(app, User, config, '/api')
-require('./routes/message')(app, Message, config, '/api/message')
+require('./routes/message')(app, io, Message, User, config, '/api/message')
+
+app.io = io
+require('./sockets/io')(io, config)
 
 module.exports = app

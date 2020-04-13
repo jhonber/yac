@@ -52,6 +52,11 @@ module.exports = (app, io, Message, User, config, mountPoint) => {
       newMessage.save()
         .then((message) => {
           console.log({ message })
+          io.emit('newMessage', {
+            username: req.user.username,
+            content: message.content,
+            date: message.createdAt
+          })
           res.json({
             ok: true,
             msg: 'Message created successfully.'
