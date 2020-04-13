@@ -16,6 +16,7 @@ import {
 } from 'reactstrap'
 
 import io from 'socket.io-client'
+import { getSecure } from '../apiUtils/apiUtils'
 
 import './room.css'
 
@@ -48,13 +49,23 @@ const Room = (props) => {
     })
   }
 
+  const getMessages = () => {
+    const url = `${props.config.urlBase}${props.config.message}`
+    getSecure(url)
+      .then(res => {
+        console.log({ res })
+        res.data.reverse()
+        setContent(content => res.data)
+      })
+  }
+
   useEffect(() => {
     if (!window.localStorage.token) {
       history.push('/login')
     }
 
     if (!initialized) {
-      // getMessages()
+      getMessages()
       connectToRoom()
     }
   }, [initialized, props])
