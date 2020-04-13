@@ -23,7 +23,6 @@ module.exports = {
 
     return window.fetch(req)
       .then(res => res.json())
-      .catch(err => err)
   },
   getSecure: (url) => {
     const req = new window.Request(url, {
@@ -37,7 +36,6 @@ module.exports = {
 
     return window.fetch(req)
       .then(res => res.json())
-      .catch(err => err)
   },
   postSecure: (url, data) => {
     const req = new window.Request(url, {
@@ -52,6 +50,5 @@ module.exports = {
 
     return window.fetch(req)
       .then(res => res.json())
-      .catch(err => err)
   }
 }
