@@ -3,6 +3,7 @@
     "urlBase": "http://localhost:3000/",
     "signup": "api/signup",
     "login": "api/login",
+    "validateUser": "api/validate",
     "message": "api/message"
   },
   "env": "development"

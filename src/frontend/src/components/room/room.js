@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import { connect } from 'react-redux'
+import { currectUser } from '../redux/actions/users'
 
 import {
   Container,
@@ -61,6 +62,21 @@ const Room = (props) => {
       })
   }
 
+  const validateUser = () => {
+    const url = `${props.config.urlBase}${props.config.validateUser}`
+    getSecure(url)
+      .then(res => {
+        console.log('res: ', res)
+        if (res.ok) {
+          props.currectUser(res.user)
+        }
+      })
+      .catch(err => {
+        console.log('Validation error: ', err)
+        history.push('/login')
+      })
+  }
+
   const scrollDown = () => {
     const ele = document.getElementsByClassName('room-content')[0]
     const len = ele.childNodes.length
@@ -68,15 +84,13 @@ const Room = (props) => {
   }
 
   useEffect(() => {
-    if (!window.localStorage.token) {
-      history.push('/login')
-    }
+    validateUser()
 
     if (!initialized) {
       getMessages()
       connectToRoom()
     }
-  }, [initialized, props])
+  }, [])
 
   const renderContent = () => {
     return content.map((msg, ind) => {
@@ -120,4 +134,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Room)
+const mapDispatchToProps = (dispatch) => ({
+  currectUser: (user) => dispatch(currectUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room)
