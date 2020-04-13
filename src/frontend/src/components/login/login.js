@@ -17,6 +17,7 @@ import {
   Col
 } from 'reactstrap'
 
+import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
 import config from '../../config.json'
 const env = config.env
@@ -64,6 +65,7 @@ const Login = (props) => {
 
   return (
     <Container>
+      <Header />
       <Row>
         <Col md={{ size: 4, offset: 4 }}>
           <Jumbotron>
