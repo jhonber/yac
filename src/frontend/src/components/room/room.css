@@ -5,12 +5,14 @@
 
 .room-content {
   overflow-y: scroll;
+  height: 100%;
 }
 
 .main {
   border-style: inset;
   border-color: #e7e7fd;
   border-bottom-style: hidden;
+  height: 300px;
 }
 
 .input-text {

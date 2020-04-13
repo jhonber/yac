@@ -46,6 +46,7 @@ const Room = (props) => {
     socket.on('newMessage', (msg) => {
       console.log('New message: ', msg)
       setContent(content => [...content, msg])
+      scrollDown()
     })
   }
 
@@ -56,7 +57,14 @@ const Room = (props) => {
         console.log({ res })
         res.data.reverse()
         setContent(content => res.data)
+        scrollDown()
       })
+  }
+
+  const scrollDown = () => {
+    const ele = document.getElementsByClassName('room-content')[0]
+    const len = ele.childNodes.length
+    ele.childNodes[len - 1].scrollIntoView()
   }
 
   useEffect(() => {

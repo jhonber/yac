@@ -4,7 +4,7 @@ import './message.css'
 const Message = (props) => {
   const message = props.data
   return (
-    <div>
+    <div className='msg-main'>
       <span className='msg-username'>
         {message.username}
       </span>
