@@ -7,7 +7,7 @@ const ShowUsers = (props) => {
     return users.map((user, ind) => {
       return (
         <li
-          key={user.email}
+          key={user.username + ind}
         >
           - {user.username}
         </li>

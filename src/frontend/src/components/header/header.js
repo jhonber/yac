@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import './header.css'
 
-const Header = () => {
+const Header = (props) => {
   let username = null
   let login = null
   let signup = null
@@ -12,8 +13,7 @@ const Header = () => {
     login = <Link className='header-link' to='/login'>Login</Link>
     signup = <Link className='header-link' to='/signup'>Sign up</Link>
   } else {
-    // TODO: access to current user info and get username
-    username = 'jhon'
+    username = props.currentUser.username
     logout = <Link className='header-link' to='/logout'>Logout</Link>
   }
 
@@ -27,4 +27,10 @@ const Header = () => {
   )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps, null)(Header)
