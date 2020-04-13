@@ -15,6 +15,8 @@ import {
   Col
 } from 'reactstrap'
 
+import io from 'socket.io-client'
+
 import './room.css'
 
 import Header from '../header/header'
@@ -23,37 +25,39 @@ import ShowUsers from '../showUsers/showUsers'
 import TextInput from '../textInput/textInput'
 
 const Room = (props) => {
-  const dummy = [
-    {
-      username: 'jhon',
-      text: 'Hello there',
-      date: '2020-04-12T16:20:45.324Z'
-    },
-    {
-      username: 'andres',
-      text: 'Hi!',
-      date: '2020-04-12T16:10:45.324Z'
-    },
-    {
-      username: 'jhon',
-      text: 'Hello there',
-      date: '2020-04-12T16:20:45.324Z'
-    },
-    {
-      username: 'andres',
-      text: 'Hi!',
-      date: '2020-04-12T16:10:45.324Z'
-    }
-  ]
+  const history = useHistory()
+  const [initialized, setInitialized] = useState(false)
+  const [content, setContent] = useState([])
 
-  const  history = useHistory()
-  const [content, setContent] = useState(dummy)
+  const connectToRoom = () => {
+    const token = window.localStorage.token
+    const url = `${props.config.urlBase}?token=${token}`
+    const socket = io.connect(url)
+
+    socket.on('connect', () => {
+      console.log('CONNECTED!!')
+      socket.emit('newUser', {
+        username: props.currentUser.username
+      })
+      setInitialized(true)
+    })
+
+    socket.on('newMessage', (msg) => {
+      console.log('New message: ', msg)
+      setContent(content => [...content, msg])
+    })
+  }
 
   useEffect(() => {
     if (!window.localStorage.token) {
       history.push('/login')
     }
-  })
+
+    if (!initialized) {
+      // getMessages()
+      connectToRoom()
+    }
+  }, [initialized, props])
 
   const renderContent = () => {
     return content.map((msg, ind) => {
@@ -75,7 +79,7 @@ const Room = (props) => {
         </Col>
         <Col sm='2'>
           <ShowUsers
-            data={dummy}
+            data={[]}
           />
         </Col>
       </Row>
