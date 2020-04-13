@@ -8,7 +8,7 @@ const Message = (props) => {
       <span className='msg-username'>
         {message.username}
       </span>
-      <span>{message.text}</span>
+      <span>{message.content}</span>
       <span>{message.date}</span>
     </div>
   )
