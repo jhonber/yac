@@ -1,6 +1,3 @@
-
-const token = window.localStorage.token
-
 module.exports = {
   get: (url) => {
     const req = new window.Request(url, {
@@ -34,7 +31,7 @@ module.exports = {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bear ' + token
+        Authorization: 'Bearer ' + window.localStorage.token
       }
     })
 
@@ -48,7 +45,7 @@ module.exports = {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: 'Bear ' + token
+        Authorization: 'Bearer ' + window.localStorage.token
       },
       body: JSON.stringify(data)
     })
