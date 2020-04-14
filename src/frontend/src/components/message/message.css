@@ -11,8 +11,11 @@
 }
 
 .msg-content {
-  font-family: '"Lucida Console", Courier, monospace';
-  padding: 5px;
+  font-family: "Lucida Console", Courier, monospace;
+  padding: 6px;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .msg-date {
@@ -33,9 +36,9 @@
   padding: 4px;
   background-color: #c1559b;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 5px;
-
+  letter-spacing: 0.07em;
 }
 
 .msg-hide {
