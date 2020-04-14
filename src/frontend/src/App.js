@@ -12,7 +12,7 @@ import Login from './components/login/login'
 import Room from './components/room/room'
 
 const env = config.env
-const CONFIG = config[env]
+config.urlBase = config[env].urlBase
 
 function App () {
   return (
@@ -20,17 +20,17 @@ function App () {
       <Switch>
         <Route exact path='/'>
           <Room
-            config={CONFIG}
+            config={config}
           />
         </Route>
         <Route path='/login'>
           <Login
-            config={CONFIG}
+            config={config}
           />
         </Route>
         <Route path='/signup'>
           <Signup
-            config={CONFIG}
+            config={config}
           />
         </Route>
       </Switch>

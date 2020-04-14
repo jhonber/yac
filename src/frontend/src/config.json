@@ -1,15 +1,18 @@
 {
+  "signup": "api/signup",
+  "login": "api/login",
+  "validateUser": "api/validate",
+  "message": "api/message",
+  "youtube": "https://www.googleapis.com/youtube/v3/search",
+  "youtubeParams": "?part=snippet&type=video&maxResults=1",
+  "youtubeApiKey": "AIzaSyCnfOE6EUyO2g3pmchakeoHFrfpvQBQtrw",
+  "youtubeEmbed": "https://www.youtube.com/embed/",
+  "youtubeCmd": "/youtube",
   "development": {
-    "urlBase": "http://localhost:3000/",
-    "signup": "api/signup",
-    "login": "api/login",
-    "validateUser": "api/validate",
-    "message": "api/message",
-    "youtube": "https://www.googleapis.com/youtube/v3/search",
-    "youtubeParams": "?part=snippet&type=video&maxResults=1",
-    "youtubeApiKey": "AIzaSyCnfOE6EUyO2g3pmchakeoHFrfpvQBQtrw",
-    "youtubeEmbed": "https://www.youtube.com/embed/",
-    "youtubeCmd": "/youtube"
+    "urlBase": "http://localhost:3000/"
   },
-  "env": "development"
+  "production": {
+    "urlBase": "https://y-a-c-back.herokuapp.com/"
+  },
+  "env": "production"
 }
