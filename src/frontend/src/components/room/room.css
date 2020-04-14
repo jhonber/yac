@@ -1,20 +1,70 @@
 .room {
-  width: 60%;
-  margin-top: 5px;
+  margin: auto;
+  width: 70%;
+  padding: 0px 5px 0px 5px;
 }
 
 .room-content {
   overflow-y: scroll;
-  height: 100%;
-}
-
-.main {
-  border-style: inset;
+  border-style: double;
   border-color: #e7e7fd;
   border-bottom-style: hidden;
+  border-width: 2px;
   height: 300px;
+}
+
+[class*="room-col-"] {
+  float: left;
 }
 
 .input-text {
   padding: 0
+}
+
+.room-users {
+  border-left-style: solid;
+  border-left-color: #d7d5d5;
+  border-left-width: 1px;
+}
+
+/* For desktop: */
+.room-col-1 {
+  width: 25%;
+}
+.room-col-2 {
+  width: 50%;
+}
+.room-col-3 {
+  width: 75%;
+}
+.room-col-4 {
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="room-col-"] {
+    width: 100%;
+  }
+
+  .room {
+    width: 100%;
+  }
+  .room-users {
+    text-align: center;
+    border-style: none;
+  }
+
+  .show-user-li {
+    padding: 0px 5px 0px 5px;
+  }
+
+  .show-user-list {
+    padding: 0px;
+    display: ruby;
+  }
+
+  .room-content {
+    border-bottom-style: solid;
+  }
 }

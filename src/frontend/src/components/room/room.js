@@ -51,6 +51,7 @@ const Room = (props) => {
     })
 
     socket.on('newUser', data => {
+      // TODO:
       // show status about new connected user
       console.log('new user:', data)
       setConnectedUser(connectedUsers => data.allUsers)
@@ -77,6 +78,7 @@ const Room = (props) => {
     getSecure(url)
       .then(res => {
         if (res.ok) {
+          console.log('USER: ', res.user)
           props.currectUser(res.user)
         }
       })
@@ -117,27 +119,25 @@ const Room = (props) => {
   }
 
   return (
-    <Container className='themed-container room' fluid='sm'>
+    <div className='room'>
       <Header />
-      <Row className='main'>
-        <Col className='room-content'>
+      <div className='room-row'>
+        <div className='room-content room-col-3'>
           {renderContent()}
-        </Col>
-        <Col sm='2'>
+        </div>
+        <div className='room-users room-col-1'>
           <ShowUsers
             data={connectedUsers}
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col className='input-text'>
+        </div>
+        <div className='input-text room-col-3'>
           <TextInput
             placeholder='Say hello!'
             {...props}
           />
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
 

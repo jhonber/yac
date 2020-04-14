@@ -1,6 +1,8 @@
 .show-user-list {
   list-style: none;
+  overflow-y: scroll;
   padding: 5px;
+  max-height: 300px;
 }
 
 .show-user-li {
