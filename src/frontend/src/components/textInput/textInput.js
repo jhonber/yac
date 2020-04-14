@@ -6,10 +6,14 @@ import {
   Input
 } from 'reactstrap'
 
-import { postSecure } from '../apiUtils/apiUtils'
+import {
+  get,
+  postSecure
+} from '../apiUtils/apiUtils'
 
 const TextInput = (props) => {
   const url = `${props.config.urlBase}${props.config.message}`
+  const youtubeCmd = props.config.youtubeCmd
   const [text, setText] = useState('')
   const [placeholder, setPlaceholder] = useState(props.placeholder)
 
@@ -19,7 +23,27 @@ const TextInput = (props) => {
 
   const handleSubmit = (event) => {
     if (event.key === 'Enter') {
-      postSecure(url, { content: text })
+      if (text.indexOf(youtubeCmd) === 0) {
+        const q = text.split(youtubeCmd)[1]
+        const urlYoutube = `${props.config.youtube}` +
+          `${props.config.youtubeParams}&q=${q}` +
+          `&key=${props.config.youtubeApiKey}`
+
+        get(urlYoutube).then(res => {
+          window.localStorage.res = JSON.stringify(res)
+          if (res.items && res.items.length > 0) {
+            const videoId = res.items[0].id.videoId
+            makeRequest(youtubeCmd + videoId)
+          }
+        })
+      } else {
+        makeRequest(text)
+      }
+    }
+
+    function makeRequest (val) {
+      const data = { content: val }
+      postSecure(url, data)
         .then(res => {
           setText('')
           setPlaceholder('')

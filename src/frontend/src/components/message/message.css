@@ -44,3 +44,7 @@
 .msg-hide {
   display: none;
 }
+
+.videoPlayer {
+  margin-top: 10px;
+}

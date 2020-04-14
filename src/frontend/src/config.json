@@ -4,7 +4,12 @@
     "signup": "api/signup",
     "login": "api/login",
     "validateUser": "api/validate",
-    "message": "api/message"
+    "message": "api/message",
+    "youtube": "https://www.googleapis.com/youtube/v3/search",
+    "youtubeParams": "?part=snippet&type=video&maxResults=1",
+    "youtubeApiKey": "AIzaSyCnfOE6EUyO2g3pmchakeoHFrfpvQBQtrw",
+    "youtubeEmbed": "https://www.youtube.com/embed/",
+    "youtubeCmd": "/youtube"
   },
   "env": "development"
 }

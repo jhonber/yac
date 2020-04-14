@@ -108,6 +108,7 @@ const Room = (props) => {
           key={msg.date + ind}
           data={msg}
           showMonth={(ind % 5) === 0}
+          {...props}
         />
       )
     })
