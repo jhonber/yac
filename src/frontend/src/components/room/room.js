@@ -89,7 +89,9 @@ const Room = (props) => {
   const scrollDown = () => {
     const ele = document.getElementsByClassName('room-content')[0]
     const len = ele.childNodes.length
-    ele.childNodes[len - 1].scrollIntoView()
+    if (len > 0) {
+      ele.childNodes[len - 1].scrollIntoView()
+    }
   }
 
   useEffect(() => {
