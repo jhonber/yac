@@ -8,9 +8,9 @@ const Message = (props) => {
   minutes = minutes < 10 ? '0' + minutes : minutes
 
   const [, month, day] = date.toDateString().split(' ')
-  const classeNames = 'msg-month-day-div' + (props.showMonth
-    ? ''
-    : ' msg-hide')
+  const classeNames = 'msg-month-day-div' + (!props.showMonth
+    ? ' msg-hide'
+    : '')
 
   const youtubeCmd = props.config.youtubeCmd
   const isVideo = (message.content.indexOf(youtubeCmd) === 0)
@@ -42,7 +42,10 @@ const Message = (props) => {
         <span className='msg-date'>
           {date.getHours()}:{minutes}
         </span>
-        <span className='msg-username'>
+        <span
+          style={{ color: message.color }}
+          className='msg-username'
+        >
           {message.username}:
         </span>
         <span className='msg-content'>
