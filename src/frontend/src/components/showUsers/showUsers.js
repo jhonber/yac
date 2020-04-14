@@ -8,16 +8,24 @@ const ShowUsers = (props) => {
     return users.map((user, ind) => {
       return (
         <li
+          className='show-user-li'
           key={user.username + ind}
         >
-          - {user.username}
+          <div
+            className='show-user-online'
+          />
+          <div
+            className='show-user-username'
+          >
+            {user.username}
+          </div>
         </li>
       )
     })
   }
 
   return (
-    <ul className='showUsers-list'>
+    <ul className='show-user-list'>
       {renderUsers()}
     </ul>
   )

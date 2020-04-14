@@ -1,4 +1,27 @@
-.showUsers-list {
+.show-user-list {
   list-style: none;
-  padding-left: 5px;
+  padding-top: 10px;
+  padding-left: 0px;
+}
+
+.show-user-li {
+  align-items: center;
+  display: flex;
+}
+
+.show-user-online {
+  background-color: #13ec13;
+  font-size: 12px;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  margin-right: 6px;
+  box-shadow: 1px 1px 1px 1px #d2e0f7;
+}
+
+.show-user-username {
+  font-size: 18px;
+  font-family: initial;
 }
