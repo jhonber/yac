@@ -3,13 +3,21 @@ const socketioJwt = require('socketio-jwt')
 const currentUsers = new Set([])
 const infoCurrentUsers = {}
 const totalConnectionsByUser = {}
+const colors = [
+  '#A52A2A', '#8A2BE2', '#8B008B',
+  '#D2691E', '#5F9EA0', '#6495ED',
+  '#000000', '#B8860B', '#006400',
+  '#FF8C00', '#2F4F4F', '#B22222',
+  '#FF1493', '#9370DB'
+]
+let curColor = 0
 
 const prepareUserInfo = (currentUsers) => {
   return Array.from(currentUsers)
     .map(email => infoCurrentUsers[email])
 }
 
-module.exports = (io, config) => {
+module.exports = (io, config, assignedColor) => {
   io.use(socketioJwt.authorize({
     secret: config.passportSecret,
     handshake: true
@@ -18,6 +26,11 @@ module.exports = (io, config) => {
   io.on('connection', (socket) => {
     let addedUser = false
     console.log('new connect:', socket.decoded_token)
+
+    if (!assignedColor[socket.decoded_token.email]) {
+      const color = colors[(curColor++) % colors.length]
+      assignedColor[socket.decoded_token.email] = color
+    }
 
     socket.on('newUser', user => {
       if (addedUser) return
@@ -40,7 +53,6 @@ module.exports = (io, config) => {
       console.log(infoCurrentUsers)
 
       const allUsers = prepareUserInfo(currentUsers)
-
       console.log('allUsers: ', allUsers)
 
       io.emit('newUser', {
@@ -50,6 +62,7 @@ module.exports = (io, config) => {
     })
 
     socket.on('newMessage', msg => {
+      // TODO: remove after if this is not used
       io.emit('newMessage', msg)
     })
 

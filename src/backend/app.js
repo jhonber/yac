@@ -9,6 +9,7 @@ const env = process.env.NODE_ENV || 'development'
 const config = require('./config/db-' + env)
 const User = require('./models/User')
 const Message = require('./models/Message')
+const assignedColor = {}
 
 const app = express()
 
@@ -17,7 +18,8 @@ connection.once('open', () => {
   console.log('Successfully connected to DB!')
 })
 
-connection.on('err', console.error.bind(console, 'DB connection error!'))
+connection.on('err',
+  console.error.bind(console, 'DB connection error!'))
 mongoose.connect(config.db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -34,9 +36,10 @@ app.use(cors())
 
 require('./config/passport-strategies')(User, config)
 require('./routes/auth')(app, User, config, '/api')
-require('./routes/message')(app, io, Message, User, config, '/api/message')
+require('./routes/message')(app, io, Message,
+  User, config, assignedColor, '/api/message')
 
 app.io = io
-require('./sockets/io')(io, config)
+require('./sockets/io')(io, config, assignedColor)
 
 module.exports = app

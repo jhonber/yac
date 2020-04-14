@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 
-module.exports = (app, io, Message, User, config, mountPoint) => {
+module.exports = (app, io, Message, User,
+  config, assignedColor, mountPoint) => {
   router.get('/',
     [passport.authenticate('jwt', { session: false })],
     (req, res, next) => {
@@ -51,11 +52,17 @@ module.exports = (app, io, Message, User, config, mountPoint) => {
       const newMessage = new Message(data)
       newMessage.save()
         .then((message) => {
-          io.emit('newMessage', {
+          const msg = {
             username: req.user.username,
             content: message.content,
-            date: message.createdAt
-          })
+            date: message.createdAt,
+            color: assignedColor[req.user.email]
+          }
+
+          console.log('ACAAA!!')
+          console.log(msg)
+
+          io.emit('newMessage', msg)
           res.json({
             ok: true,
             msg: 'Message created successfully.'
