@@ -3,8 +3,41 @@
 }
 
 .msg-username {
+  font-weight: bold;
   font-size: 20px;
   padding: 5px;
   color: crimson;
   font-style: oblique;
+}
+
+.msg-content {
+  font-family: '"Lucida Console", Courier, monospace';
+  padding: 5px;
+}
+
+.msg-date {
+  color: #aea8a7;
+  font-size: 13px;
+  font-family: '"Lucida Console", Courier, monospace';
+  padding-right: 4px;
+  padding-top: 30px;
+}
+
+.msg-month-day-div {
+  text-align: center;
+  border-radius: 3px;
+}
+
+.msg-month-day {
+  font-weight: bold;
+  padding: 4px;
+  background-color: #c1559b;
+  color: white;
+  font-size: 12px;
+  border-radius: 5px;
+
+}
+
+.msg-hide {
+  display: none;
 }
