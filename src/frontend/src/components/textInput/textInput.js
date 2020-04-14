@@ -30,7 +30,6 @@ const TextInput = (props) => {
           `&key=${props.config.youtubeApiKey}`
 
         get(urlYoutube).then(res => {
-          window.localStorage.res = JSON.stringify(res)
           if (res.items && res.items.length > 0) {
             const videoId = res.items[0].id.videoId
             makeRequest(youtubeCmd + videoId)

@@ -1,14 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {
+  useHistory,
+  Link
+} from 'react-router-dom'
 import { connect } from 'react-redux'
 import './header.css'
+
+import { currectUser } from '../redux/actions/users'
 
 const Header = (props) => {
   let username = props.currentUser.username
   let email = props.currentUser.email
   let login = null
   let signup = null
-  let logout = null
+  let logoutLink = null
+
+  const history = useHistory()
+
+  const logout = () => {
+    const process = () => {
+      props.currectUser()
+      delete window.localStorage.token
+      delete window.localStorage.username
+      history.push('/login')
+    }
+
+    return (
+      <Link
+        className='header-link'
+        to='#'
+        onClick={process}
+      >
+        Logout
+      </Link>
+    )
+  }
 
   if (!window.localStorage.token) {
     login = <Link className='header-link' to='/login'>Login</Link>
@@ -16,7 +42,7 @@ const Header = (props) => {
   } else {
     email = '(' + email + ')'
     username = username || ''
-    logout = <Link className='header-link' to='/logout'>Logout</Link>
+    logoutLink = logout()
   }
 
   return (
@@ -25,7 +51,7 @@ const Header = (props) => {
       {email}
       {login}
       {signup}
-      {logout}
+      {logoutLink}
     </div>
   )
 }
@@ -36,4 +62,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(Header)
+const mapDispatchToProps = (dispatch) => ({
+  currectUser: () => dispatch(currectUser({}))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
