@@ -6,6 +6,10 @@ const ShowUsers = (props) => {
 
   const renderUsers = () => {
     return users.map((user, ind) => {
+      const username = user.username.length > 5
+        ? user.username.slice(0, 5) + '...'
+        : user.username
+
       return (
         <li
           className='show-user-li'
@@ -15,9 +19,10 @@ const ShowUsers = (props) => {
             className='show-user-online'
           />
           <div
+            style={{ color: user.color }}
             className='show-user-username'
           >
-            {user.username}
+            {username}
           </div>
         </li>
       )

@@ -1,7 +1,6 @@
 .show-user-list {
   list-style: none;
-  padding-top: 10px;
-  padding-left: 0px;
+  padding: 5px;
 }
 
 .show-user-li {
@@ -22,6 +21,7 @@
 }
 
 .show-user-username {
-  font-size: 18px;
+  font-weight: bold;
+  font-size: 16px;
   font-family: initial;
 }

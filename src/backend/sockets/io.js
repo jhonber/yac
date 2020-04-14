@@ -40,7 +40,8 @@ module.exports = (io, config, assignedColor) => {
       currentUsers.add(socket.email)
 
       infoCurrentUsers[socket.email] = {
-        username: user.username
+        username: user.username,
+        color: assignedColor[socket.email]
       }
 
       if (!totalConnectionsByUser[socket.email]) {

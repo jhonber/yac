@@ -3,6 +3,9 @@ import './message.css'
 
 const Message = (props) => {
   const message = props.data
+  const username = message.username.length > 5
+    ? message.username.slice(0, 5) + '...'
+    : message.username
   const date = new Date(message.date)
   let minutes = date.getMinutes()
   minutes = minutes < 10 ? '0' + minutes : minutes
@@ -46,7 +49,7 @@ const Message = (props) => {
           style={{ color: message.color }}
           className='msg-username'
         >
-          {message.username}:
+          {username}:
         </span>
         <span className='msg-content'>
           {isVideo && videoPlayer()}
