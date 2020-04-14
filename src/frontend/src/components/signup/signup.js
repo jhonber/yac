@@ -1,6 +1,9 @@
 import React,
 { useState } from 'react'
 import {
+  useHistory
+} from 'react-router-dom'
+import {
   Input,
   Button,
   Form,
@@ -16,6 +19,7 @@ import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
 
 const Signup = (props) => {
+  const history = useHistory()
   const [username, setUsername] = useState('jhon')
   const [email, setEmail] = useState('jhon@gmail.com')
   const [password, setPassword] = useState('1234')
@@ -53,9 +57,8 @@ const Signup = (props) => {
         console.log({ res })
         if (res) {
           if (res.ok) {
-            // TODO:
-            // - redirect to login page
             window.alert('Successfully registered.')
+            history.push('/login')
           } else {
             window.alert(res.msg)
           }
