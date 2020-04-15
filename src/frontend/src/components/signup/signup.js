@@ -1,20 +1,21 @@
-import React,
-{ useState } from 'react'
+import React, {
+  useState
+} from 'react'
+
 import {
   useHistory
 } from 'react-router-dom'
+
 import {
   Input,
   Button,
   Form,
   FormGroup,
   Label,
-  Jumbotron,
-  Container,
-  Row,
-  Col
+  Jumbotron
 } from 'reactstrap'
 
+import '../login/login.css'
 import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
 
@@ -70,59 +71,57 @@ const Signup = (props) => {
   }
 
   return (
-    <Container>
+    <div>
       <Header />
-      <Row>
-        <Col md={{ size: 4, offset: 4 }}>
-          <Jumbotron>
-            <h2>Sign up</h2>
-            <Form>
-              <FormGroup>
-                <Label>Username</Label>
-                <Input
-                  type='text'
-                  name='username'
-                  value={username}
-                  onChange={handleUsername}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Email</Label>
-                <Input
-                  type='text'
-                  name='email'
-                  value={email}
-                  onChange={handleEmail}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  value={password}
-                  onChange={handlePassword}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Confirmation</Label>
-                <Input
-                  type='password'
-                  name='password2'
-                  value={password2}
-                  onChange={handlePassword2}
-                />
-              </FormGroup>
-              <Button
-                onClick={handleSubmit}
-              >
-                Sign up
-              </Button>
-            </Form>
-          </Jumbotron>
-        </Col>
-      </Row>
-    </Container>
+      <div className='login-main'>
+        <Jumbotron className='login-form'>
+          <h3>Sign up</h3>
+          <Form>
+            <FormGroup>
+              <Label>Username</Label>
+              <Input
+                type='text'
+                name='username'
+                value={username}
+                onChange={handleUsername}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                type='text'
+                name='email'
+                value={email}
+                onChange={handleEmail}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type='password'
+                name='password'
+                value={password}
+                onChange={handlePassword}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Confirmation</Label>
+              <Input
+                type='password'
+                name='password2'
+                value={password2}
+                onChange={handlePassword2}
+              />
+            </FormGroup>
+            <Button
+              onClick={handleSubmit}
+            >
+              Sign up
+            </Button>
+          </Form>
+        </Jumbotron>
+      </div>
+    </div>
   )
 }
 

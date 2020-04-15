@@ -1,0 +1,13 @@
+.login-main {
+  margin: auto;
+  width: 23%;
+}
+
+.login-main h3{
+  text-align: center;
+}
+
+.login-form {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

@@ -11,11 +11,10 @@ import {
   Form,
   FormGroup,
   Label,
-  Jumbotron,
-  Container,
-  Row,
-  Col
+  Jumbotron
 } from 'reactstrap'
+
+import './login.css'
 
 import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
@@ -62,41 +61,39 @@ const Login = (props) => {
   }
 
   return (
-    <Container>
+    <div className='login-main'>
       <Header />
-      <Row>
-        <Col md={{ size: 4, offset: 4 }}>
-          <Jumbotron>
-            <h2>Login</h2>
-            <Form>
-              <FormGroup>
-                <Label>Email</Label>
-                <Input
-                  type='text'
-                  name='email'
-                  value={email}
-                  onChange={handleEmail}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Password</Label>
-                <Input
-                  type='password'
-                  name='password'
-                  value={password}
-                  onChange={handlePassword}
-                />
-              </FormGroup>
-              <Button
-                onClick={handleSubmit}
-              >
-                Login
-              </Button>
-            </Form>
-          </Jumbotron>
-        </Col>
-      </Row>
-    </Container>
+      <div>
+        <Jumbotron className='login-form'>
+          <h3>Login</h3>
+          <Form>
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                type='text'
+                name='email'
+                value={email}
+                onChange={handleEmail}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type='password'
+                name='password'
+                value={password}
+                onChange={handlePassword}
+              />
+            </FormGroup>
+            <Button
+              onClick={handleSubmit}
+            >
+              Login
+            </Button>
+          </Form>
+        </Jumbotron>
+      </div>
+    </div>
   )
 }
 
