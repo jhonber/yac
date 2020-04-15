@@ -25,7 +25,6 @@ const Room = (props) => {
   const [initialized, setInitialized] = useState(false)
   const [content, setContent] = useState([])
   const [connectedUsers, setConnectedUser] = useState(0)
-  const [status, setStatus] = useState('Welcome!')
 
   const connectToRoom = () => {
     const token = window.localStorage.token
@@ -36,7 +35,6 @@ const Room = (props) => {
       socket.emit('newUser', {
         username: props.currentUser.username || window.localStorage.username
       })
-      setInitialized(true)
     })
 
     socket.on('newMessage', msg => {
@@ -46,14 +44,28 @@ const Room = (props) => {
     })
 
     socket.on('newUser', data => {
-      setStatus(status => data.user.username + ' joined')
+      const msg = {
+        username: '',
+        date: new Date(),
+        content: data.user.username + ' joined',
+        color: ''
+      }
+      setContent(content => [...content, msg])
+      scrollDown()
       console.log('new user:', data)
       setConnectedUser(connectedUsers => data.allUsers)
     })
 
     socket.on('leftUser', data => {
       console.log('user left: ', data)
-      setStatus(status => data.user.username + ' left')
+      const msg = {
+        username: '',
+        date: new Date(),
+        content: data.user.username + ' left',
+        color: ''
+      }
+      setContent(content => [...content, msg])
+      scrollDown()
       setConnectedUser(connectedUsers => data.allUsers)
     })
   }
@@ -75,6 +87,7 @@ const Room = (props) => {
         if (res.ok) {
           console.log('USER: ', res.user)
           props.currectUser(res.user)
+          setInitialized(true)
         }
       })
       .catch(err => {
@@ -119,9 +132,6 @@ const Room = (props) => {
       <div className='room-row'>
         <div className='room-content room-col-4'>
           {renderContent()}
-          <div className='room-status'>
-            {status}
-          </div>
         </div>
         <div className='room-users room-col-0'>
           <ShowUsers

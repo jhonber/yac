@@ -37,30 +37,47 @@ const Message = (props) => {
     )
   }
 
+  const renderMessage = () => {
+    return (
+      <div className='msg-main'>
+        <div className={classeNames}>
+          <span
+            className='msg-month-day'
+          >
+            {month} {day}
+          </span>
+        </div>
+        <div>
+          <span className='msg-date'>
+            {date.getHours()}:{minutes}
+          </span>
+          <span
+            style={{ color: message.color }}
+            className='msg-username'
+          >
+            {username}:
+          </span>
+          <span className='msg-content'>
+            {isVideo && videoPlayer()}
+            {!isVideo && message.content}
+          </span>
+        </div>
+      </div>
+    )
+  }
+
+  const renderStatus = () => {
+    return (
+      <div className='room-status'>
+        {message.content}
+      </div>
+    )
+  }
+
   return (
-    <div className='msg-main'>
-      <div className={classeNames}>
-        <span
-          className='msg-month-day'
-        >
-          {month} {day}
-        </span>
-      </div>
-      <div>
-        <span className='msg-date'>
-          {date.getHours()}:{minutes}
-        </span>
-        <span
-          style={{ color: message.color }}
-          className='msg-username'
-        >
-          {username}:
-        </span>
-        <span className='msg-content'>
-          {isVideo && videoPlayer()}
-          {!isVideo && message.content}
-        </span>
-      </div>
+    <div>
+      {message.username === '' && renderStatus()}
+      {message.username !== '' && renderMessage()}
     </div>
   )
 }
