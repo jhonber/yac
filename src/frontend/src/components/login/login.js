@@ -19,10 +19,10 @@ import './login.css'
 import Header from '../header/header'
 import { post } from '../apiUtils/apiUtils'
 
-const Login = (props) => {
+export const Login = (props) => {
   const history = useHistory()
-  const [email, setEmail] = useState('jhon2@gmail.com')
-  const [password, setPassword] = useState('1234')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleEmail = (event) => {
     setEmail(event.target.value)
