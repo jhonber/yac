@@ -7,11 +7,11 @@ const ShowUsers = (props) => {
 
   const renderUsers = () => {
     return users.map((user, ind) => {
-      const username = user.username.length > 5
-        ? user.username.slice(0, 5) + '...'
-        : user.username
+      if (props.currentUser.username !== user.username) {
+        const username = user.username.length > 5
+          ? user.username.slice(0, 8) + '...'
+          : user.username
 
-      if (props.currentUser.username !== username) {
         return (
           <li
             className='show-user-li'
