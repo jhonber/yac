@@ -117,18 +117,18 @@ const Room = (props) => {
     <div className='room'>
       <Header />
       <div className='room-row'>
-        <div className='room-content room-col-3'>
+        <div className='room-content room-col-4'>
           {renderContent()}
           <div className='room-status'>
             {status}
           </div>
         </div>
-        <div className='room-users room-col-1'>
+        <div className='room-users room-col-0'>
           <ShowUsers
             data={connectedUsers}
           />
         </div>
-        <div className='input-text room-col-3'>
+        <div className='input-text room-col-4'>
           <TextInput
             placeholder='Say hello!'
             {...props}

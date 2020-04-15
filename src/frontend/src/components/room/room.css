@@ -1,6 +1,6 @@
 .room {
   margin: auto;
-  width: 80%;
+  width: 70%;
   padding: 0px 5px 0px 5px;
 }
 
@@ -35,6 +35,9 @@
 }
 
 /* For desktop: */
+.room-col-0 {
+  width: 10%;
+}
 .room-col-1 {
   width: 25%;
 }
@@ -45,6 +48,9 @@
   width: 75%;
 }
 .room-col-4 {
+  width: 90%;
+}
+.room-col-5 {
   width: 100%;
 }
 
