@@ -1,8 +1,8 @@
 const supertest = require('supertest')
 const app = require('../app')
-// app.listen(3333)
 const request = supertest(app)
 
+/* eslint-disable */
 describe('POST /users', () => {
   it ('login failed', () => {
     const data = {
