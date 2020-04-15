@@ -25,6 +25,7 @@ Yet Another Chat
 - Allow multiple connections with same user
 - Responsive for different screen sizes
 - Added custom favicon
+- Basic test for login component and end point /api/login
 
 ### Backend stack
 - Nodejs: Expressjs
@@ -56,6 +57,33 @@ Yet Another Chat
 - newMessage
 - leftUser
 - disconnect
+
+### Tests
+#### frontend
+
+Snapshot test for login component: expect match with previous snaptshot
+
+```
+    $ cd src/frontend
+    $ npm run test
+```
+
+#### backend
+Test endpoint _POST /api/login_: expect successful login with response
+
+```javascript
+    {
+      ok: true,
+      token: '<TOKEN_STRING>',
+      user: { username: 'test', email: 'test@test.com' }
+    }
+
+```
+
+```
+    $ cd src/frontend
+    $ npm run test
+```
 
 
 
