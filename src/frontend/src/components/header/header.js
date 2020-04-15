@@ -37,7 +37,7 @@ const Header = (props) => {
     )
   }
 
-  if (!window.localStorage.token) {
+  if (!username) {
     login = <Link className='header-link' to='/login'>Login</Link>
     signup = <Link className='header-link' to='/signup'>Sign up</Link>
   } else {
