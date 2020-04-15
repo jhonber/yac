@@ -1,5 +1,6 @@
 import React from 'react'
 import './message.css'
+import YoutubePlayer from '../youtubePlayer/youtubePlayer'
 
 const Message = (props) => {
   const message = props.data
@@ -17,22 +18,13 @@ const Message = (props) => {
 
   const youtubeCmd = props.config.youtubeCmd
   const isVideo = (message.content.indexOf(youtubeCmd) === 0)
-  const videoId = message.content.split(youtubeCmd)[1]
-
   const videoPlayer = () => {
+    const videoId = message.content.split(youtubeCmd)[1]
     const src = props.config.youtubeEmbed + videoId
     return (
-      <iframe
-        className='videoPlayer'
-        title={videoId}
-        width='300'
-        height='150'
-        allowfullscreen='allowfullscreen'
-        mozallowfullscreen='mozallowfullscreen'
-        msallowfullscreen='msallowfullscreen'
-        oallowfullscreen='oallowfullscreen'
-        webkitallowfullscreen='webkitallowfullscreen'
+      <YoutubePlayer
         src={src}
+        videoId={videoId}
       />
     )
   }
