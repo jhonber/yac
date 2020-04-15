@@ -22,6 +22,7 @@ const Header = (props) => {
       props.currectUser()
       delete window.localStorage.token
       delete window.localStorage.username
+      props.socket.emit('forceDisconnect')
       history.push('/login')
     }
 

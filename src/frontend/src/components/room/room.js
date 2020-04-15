@@ -25,6 +25,7 @@ const Room = (props) => {
   const [initialized, setInitialized] = useState(false)
   const [content, setContent] = useState([])
   const [connectedUsers, setConnectedUser] = useState(0)
+  const [socketReady, setSocketReady] = useState(null)
 
   const connectToRoom = () => {
     const token = window.localStorage.token
@@ -32,8 +33,10 @@ const Room = (props) => {
     const socket = io.connect(url)
 
     socket.on('connect', () => {
+      setSocketReady(socketReady => socket)
       socket.emit('newUser', {
-        username: props.currentUser.username || window.localStorage.username
+        username: props.currentUser.username ||
+          window.localStorage.username
       })
     })
 
@@ -124,7 +127,7 @@ const Room = (props) => {
 
   return (
     <div className='room'>
-      <Header />
+      {socketReady && <Header socket={socketReady} />}
       <div className='room-row'>
         <div className='room-content room-col-4'>
           {renderContent()}

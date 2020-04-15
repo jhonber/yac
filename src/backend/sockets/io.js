@@ -84,5 +84,10 @@ module.exports = (io, config, assignedColor) => {
         }
       }
     })
+
+    socket.on('forceDisconnect', () => {
+      console.log('logout:', socket.email)
+      socket.disconnect()
+    })
   })
 }
