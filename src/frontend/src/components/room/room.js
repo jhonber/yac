@@ -38,7 +38,6 @@ const Room = (props) => {
     })
 
     socket.on('newMessage', msg => {
-      console.log('New message: ', msg)
       setContent(content => [...content, msg])
       scrollDown()
     })
@@ -52,12 +51,10 @@ const Room = (props) => {
       }
       setContent(content => [...content, msg])
       scrollDown()
-      console.log('new user:', data)
       setConnectedUser(connectedUsers => data.allUsers)
     })
 
     socket.on('leftUser', data => {
-      console.log('user left: ', data)
       const msg = {
         username: '',
         date: new Date(),
@@ -85,7 +82,6 @@ const Room = (props) => {
     getSecure(url)
       .then(res => {
         if (res.ok) {
-          console.log('USER: ', res.user)
           props.currectUser(res.user)
           setInitialized(true)
         }

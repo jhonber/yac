@@ -19,7 +19,6 @@ module.exports = {
       },
       body: JSON.stringify(data)
     })
-    console.log({ req })
 
     return window.fetch(req)
       .then(res => res.json())

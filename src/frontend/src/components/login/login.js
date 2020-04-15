@@ -34,16 +34,13 @@ const Login = (props) => {
 
   const handleSubmit = () => {
     const url = `${props.config.urlBase}${props.config.login}`
-    console.log({ url })
     const data = {
       email: email,
       password: password
     }
-    console.log({ data })
 
     post(url, data)
       .then(res => {
-        console.log({ res })
         if (res) {
           if (res.ok) {
             window.localStorage.token = res.token

@@ -54,7 +54,6 @@ const TextInput = (props) => {
           setText('')
           setPlaceholder('')
           setDisabled(false)
-          console.log({ res })
           if (!res.ok) {
             console.log('Error: ', res.msg)
           }

@@ -44,18 +44,15 @@ const Signup = (props) => {
 
   const handleSubmit = () => {
     const url = `${props.config.urlBase}${props.config.signup}`
-    console.log({ url })
     const data = {
       username: username,
       email: email,
       password: password,
       password2: password2
     }
-    console.log({ data })
 
     post(url, data)
       .then(res => {
-        console.log({ res })
         if (res) {
           if (res.ok) {
             window.alert('Successfully registered.')
