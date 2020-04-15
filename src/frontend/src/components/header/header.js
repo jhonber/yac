@@ -42,7 +42,7 @@ const Header = (props) => {
   } else {
     // email = '(' + email + ')'
     email = null
-    username = username || ''
+    username = '[ ' + username + ' ]' || ''
     logoutLink = logout()
   }
 
@@ -51,7 +51,7 @@ const Header = (props) => {
       <span
         className='header-username'
       >
-        [ {username} ]
+        {username}
       </span>
       {email}
       {login}

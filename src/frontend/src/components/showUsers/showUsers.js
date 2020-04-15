@@ -1,5 +1,6 @@
 import React from 'react'
 import './showUsers.css'
+import { connect } from 'react-redux'
 
 const ShowUsers = (props) => {
   const users = props.data || []
@@ -10,22 +11,24 @@ const ShowUsers = (props) => {
         ? user.username.slice(0, 5) + '...'
         : user.username
 
-      return (
-        <li
-          className='show-user-li'
-          key={user.username + ind}
-        >
-          <div
-            className='show-user-online'
-          />
-          <div
-            style={{ color: user.color }}
-            className='show-user-username'
+      if (props.currentUser.username !== username) {
+        return (
+          <li
+            className='show-user-li'
+            key={user.username + ind}
           >
-            {username}
-          </div>
-        </li>
-      )
+            <div
+              className='show-user-online'
+            />
+            <div
+              style={{ color: user.color }}
+              className='show-user-username'
+            >
+              {username}
+            </div>
+          </li>
+        )
+      } else return null
     })
   }
 
@@ -36,4 +39,10 @@ const ShowUsers = (props) => {
   )
 }
 
-export default ShowUsers
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps, null)(ShowUsers)
