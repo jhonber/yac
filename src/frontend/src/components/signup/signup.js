@@ -21,10 +21,10 @@ import { post } from '../apiUtils/apiUtils'
 
 const Signup = (props) => {
   const history = useHistory()
-  const [username, setUsername] = useState('jhon')
-  const [email, setEmail] = useState('jhon@gmail.com')
-  const [password, setPassword] = useState('1234')
-  const [password2, setPassword2] = useState('1234')
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
 
   const handleUsername = (event) => {
     setUsername(event.target.value)
