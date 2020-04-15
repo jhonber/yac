@@ -27,6 +27,11 @@ const Message = (props) => {
         title={videoId}
         width='300'
         height='150'
+        allowfullscreen='allowfullscreen'
+        mozallowfullscreen='mozallowfullscreen'
+        msallowfullscreen='msallowfullscreen'
+        oallowfullscreen='oallowfullscreen'
+        webkitallowfullscreen='webkitallowfullscreen'
         src={src}
       />
     )
