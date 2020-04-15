@@ -7,7 +7,7 @@ const YoutubePlayer = (props) => {
       title={props.videoId}
       width='300'
       height='150'
-      allowfullscreen='allowfullscreen'
+      allowFullScreen
       mozallowfullscreen='mozallowfullscreen'
       msallowfullscreen='msallowfullscreen'
       oallowfullscreen='oallowfullscreen'
