@@ -42,7 +42,7 @@ const Header = (props) => {
   } else {
     // email = '(' + email + ')'
     email = null
-    username = '[ ' + username + ' ]' || ''
+    username = username || ''
     logoutLink = logout()
   }
 
