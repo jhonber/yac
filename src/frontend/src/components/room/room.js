@@ -96,9 +96,13 @@ const Room = (props) => {
   }
 
   const scrollDown = () => {
-    const ele = document.getElementsByClassName('room-content')[0]
-    const len = ele.childNodes.length
-    if (len > 0) {
+    let ele = document.getElementsByClassName('room-content')
+    if (ele.length === 0) return
+
+    ele = ele[0]
+    if (ele.childNodes &&
+      ele.childNodes.length > 0) {
+      const len = ele.childNodes.length
       ele.childNodes[len - 1].scrollIntoView()
     }
   }
@@ -125,27 +129,32 @@ const Room = (props) => {
     })
   }
 
-  return (
-    <div className='room'>
-      {socketReady && <Header socket={socketReady} />}
-      <div className='room-row'>
-        <div className='room-content room-col-4'>
-          {renderContent()}
-        </div>
-        <div className='room-users room-col-0'>
-          <ShowUsers
-            data={connectedUsers}
-          />
-        </div>
-        <div className='input-text room-col-4'>
-          <TextInput
-            placeholder='Say hello!'
-            {...props}
-          />
+  const renderRoom = () => {
+    return (
+      <div className='room'>
+        {socketReady && <Header socket={socketReady} />}
+        <div className='room-row'>
+          <div className='room-content room-col-4'>
+            {renderContent()}
+          </div>
+          <div className='room-users room-col-0'>
+            <ShowUsers
+              data={connectedUsers}
+            />
+          </div>
+          <div className='input-text room-col-4'>
+            <TextInput
+              placeholder='Say hello!'
+              {...props}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  const view = initialized ? renderRoom() : null
+  return view
 }
 
 const mapStateToProps = (state) => {
