@@ -4,8 +4,8 @@ import YoutubePlayer from '../youtubePlayer/youtubePlayer'
 
 const Message = (props) => {
   const message = props.data
-  const username = message.username.length > 5
-    ? message.username.slice(0, 5) + '...'
+  const username = message.username.length > 10
+    ? message.username.slice(0, 10) + '...'
     : message.username
   const date = new Date(message.date)
   let minutes = date.getMinutes()

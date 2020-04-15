@@ -8,8 +8,8 @@ const ShowUsers = (props) => {
   const renderUsers = () => {
     return users.map((user, ind) => {
       if (props.currentUser.username !== user.username) {
-        const username = user.username.length > 5
-          ? user.username.slice(0, 8) + '...'
+        const username = user.username.length > 10
+          ? user.username.slice(0, 10) + '...'
           : user.username
 
         return (
