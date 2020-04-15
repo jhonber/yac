@@ -10,12 +10,6 @@ import {
 import { connect } from 'react-redux'
 import { currectUser } from '../redux/actions/users'
 
-import {
-  Container,
-  Row,
-  Col
-} from 'reactstrap'
-
 import io from 'socket.io-client'
 import { getSecure } from '../apiUtils/apiUtils'
 
@@ -31,6 +25,7 @@ const Room = (props) => {
   const [initialized, setInitialized] = useState(false)
   const [content, setContent] = useState([])
   const [connectedUsers, setConnectedUser] = useState(0)
+  const [status, setStatus] = useState('Welcome!')
 
   const connectToRoom = () => {
     const token = window.localStorage.token
@@ -51,14 +46,14 @@ const Room = (props) => {
     })
 
     socket.on('newUser', data => {
-      // TODO:
-      // show status about new connected user
+      setStatus(status => data.user.username + ' joined')
       console.log('new user:', data)
       setConnectedUser(connectedUsers => data.allUsers)
     })
 
     socket.on('leftUser', data => {
       console.log('user left: ', data)
+      setStatus(status => data.user.username + ' left')
       setConnectedUser(connectedUsers => data.allUsers)
     })
   }
@@ -124,6 +119,9 @@ const Room = (props) => {
       <div className='room-row'>
         <div className='room-content room-col-3'>
           {renderContent()}
+          <div className='room-status'>
+            {status}
+          </div>
         </div>
         <div className='room-users room-col-1'>
           <ShowUsers
