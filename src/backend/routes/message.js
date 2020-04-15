@@ -43,7 +43,6 @@ module.exports = (app, io, Message, User,
   router.post('/',
     [passport.authenticate('jwt', { session: false })],
     (req, res, next) => {
-      console.log('user: ', req.user)
       const data = {
         userId: req.user._id,
         ...req.body
@@ -58,9 +57,6 @@ module.exports = (app, io, Message, User,
             date: message.createdAt,
             color: assignedColor[req.user.email]
           }
-
-          console.log('ACAAA!!')
-          console.log(msg)
 
           io.emit('newMessage', msg)
           res.json({

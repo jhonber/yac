@@ -75,8 +75,6 @@ module.exports = (io, config, assignedColor) => {
         if (totalConnectionsByUser[email] === 0) {
           currentUsers.delete(email)
           delete infoCurrentUsers[email]
-          console.log(email)
-          console.log(totalConnectionsByUser)
 
           const allUsers = prepareUserInfo(currentUsers)
           io.emit('leftUser', {

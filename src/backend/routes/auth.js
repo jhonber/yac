@@ -29,7 +29,6 @@ module.exports = (app, User, config, mountPoint) => {
 
     User.findOne({ email: data.email })
       .then((user) => {
-        console.log({ user })
         userData = {
           username: user.username,
           email: user.email
@@ -37,7 +36,6 @@ module.exports = (app, User, config, mountPoint) => {
         return bcrypt.compare(data.password, user.password)
       })
       .then((result) => {
-        console.log({ result })
         if (result) {
           const email = { email: data.email }
           const token = jwt.encode(email, config.passportSecret)
@@ -64,7 +62,6 @@ module.exports = (app, User, config, mountPoint) => {
 
   router.post('/signup', (req, res, next) => {
     const data = req.body
-    console.log({ data })
 
     if (!data.username || !data.password || !data.email) {
       res.json({
@@ -89,7 +86,6 @@ module.exports = (app, User, config, mountPoint) => {
           return newUser.save()
         })
         .then((user) => {
-          console.log({ user })
           res.json({
             ok: true,
             msg: 'User successfully created.'
