@@ -31,3 +31,11 @@
   font-size: 16px;
   font-family: initial;
 }
+
+@media only screen and (min-width: 767px) {
+  .show-user-list {
+    position: absolute;
+    padding: 0px;
+    display: ruby;
+  }
+}
