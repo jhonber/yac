@@ -85,7 +85,9 @@ Test endpoint _POST /api/login_: expect successful login with response
     $ npm run test
 ```
 
-
+#### Deploy
+- [mLab](https://mlab.com/): Use Mongo free sandbox 0.5GB
+- [Heroku](http://heroku.com/): Use free plan to hosting front/back
 
 
 
