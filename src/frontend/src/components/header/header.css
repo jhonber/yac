@@ -5,3 +5,10 @@
 .header-link {
   padding: 10px;
 }
+
+.header-username{
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px;
+  color: #696969;
+}

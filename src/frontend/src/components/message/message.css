@@ -1,5 +1,6 @@
 .msg-main {
   padding-bottom: 6px;
+  padding-left: 10px;
 }
 
 .msg-username {
@@ -13,7 +14,6 @@
 .msg-content {
   font-family: "Lucida Console", Courier, monospace;
   padding: 6px;
-  background-color: #fbfbfb;
   border-radius: 5px;
   font-weight: bold;
 }

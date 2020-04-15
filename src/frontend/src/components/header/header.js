@@ -40,14 +40,19 @@ const Header = (props) => {
     login = <Link className='header-link' to='/login'>Login</Link>
     signup = <Link className='header-link' to='/signup'>Sign up</Link>
   } else {
-    email = '(' + email + ')'
+    // email = '(' + email + ')'
+    email = null
     username = username || ''
     logoutLink = logout()
   }
 
   return (
     <div className='header-container'>
-      {username}
+      <span
+        className='header-username'
+      >
+        [ {username} ]
+      </span>
       {email}
       {login}
       {signup}
